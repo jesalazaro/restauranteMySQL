@@ -1,0 +1,24 @@
+CREATE SCHEMA libreria;
+USE libreria;
+CREATE TABLE libro(
+	libId 			integer		NOT NULL PRIMARY KEY,
+    libNombre		char(50) 	NOT NULL,	
+    libPub			smallint	NULL
+					);
+                    
+CREATE TABLE autor(
+	autId			integer 		AUTO_INCREMENT 	PRIMARY KEY,
+    autApellido		varchar(30)		NOT NULL DEFAULT "",
+    autNombre 		varchar(50)		NOT NULL,
+    autEmail		char(30)		NULL,
+    autPais			ENUM('Argentina', 'Alemania', 'Colombia', 'Italia', 'México', 'España', 'EUA')
+					DEFAULT  "Colombia"
+					);
+                    
+CREATE TABLE venta (
+	vtaId			integer 		AUTO_INCREMENT PRIMARY KEY,
+    vtaFecha		date			NOT NULL,
+    libId 			integer			NOT NULL,
+    vtaCantidad 	smallint		NOT NULL,
+    FOREIGN KEY(libId) REFERENCES libro(libId),
+    );
